@@ -21,10 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/config/users', 'AdminController@users')->name('configUsers');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/users/setAdmin/{id}', 'UserController@setAdmin')->name('setUserAsAdmin');
+Route::post('/delete/{id}', 'UserController@delete')->name('deleteUser');
