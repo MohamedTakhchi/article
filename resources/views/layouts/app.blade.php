@@ -76,6 +76,9 @@
                                     <a class="dropdown-item" href="{{ route('configUsers') }}">
                                         {{ __('Utilisateurs') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('configPosts') }}">
+                                        {{ __('Articles') }}
+                                    </a>
                                 </div>
                             </li>
                             @endif

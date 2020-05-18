@@ -13,7 +13,8 @@
                             <th>Description</th>
                             <th>Image</th>
                             <th>Date</th>
-                            <th colspan="2">Action</th>
+                            <th>Utilisateur</th>
+                            <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="listPosts">
@@ -25,17 +26,15 @@
                                     <img src="/Images/{{ $post->image }}" width="50px" height="50px" alt="Pas d'image dispponible">
                                 </td>
                                 <td>{{ $post->created_at }}</td>
+                                <td>{{ $post->user->name }}</td>
                                 <td>
-                                    <form action="{{ route('updatePostForm',['id'=>$post->id]) }}">
-                                        <button type="submit"  class="btn btn-success"> Modifier </button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="{{route('deletePost',['id'=>$post->id])}}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="deleteForUser" value="1">
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer cet Article!')"> Supprimer </button>
-                                    </form>
+                                    @if( $post->user->isAdmin == 0 )
+                                        <form action="{{route('deletePost',['id'=>$post->id])}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="deleteForAdmin" value="1">
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer cet Article!')"> Supprimer </button>
+                                        </form>
+                                    @endif
                                 </td>
                         </tr>
                     @endforeach

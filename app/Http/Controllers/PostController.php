@@ -45,7 +45,7 @@ class PostController extends Controller
 
     public function userPosts()
     {
-    	$posts = Post::All();
+    	$posts = Auth::user()->posts()->get();
     	return view('post.list', ['posts' => $posts]);
     }
 
@@ -85,5 +85,8 @@ class PostController extends Controller
 
     	if( $request->deleteForUser )
     		return redirect()->route('userPosts')->with('success', 'Article Supprimé');
+
+    	if( $request->deleteForAdmin )
+    		return redirect()->route('configPosts')->with('success', 'Article Supprimé');
     }
 }

@@ -23,9 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //For Admin Only
 Route::get('/config/users', 'AdminController@users')->name('configUsers');
-
 Route::post('/users/setAdmin/{id}', 'UserController@setAdmin')->name('setUserAsAdmin');
 Route::post('/delete/{id}', 'UserController@delete')->name('deleteUser');
+
+Route::get('/config/posts', 'AdminController@posts')->name('configPosts');
 
 //For Users
 Route::get('/addPost','PostController@addForm')->name('addPostForm');
