@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -27,4 +28,5 @@ class UserController extends Controller
     	return redirect()->route('configUsers')->with('success', $user->name.' est supprimé');
     }
 
+    
 }

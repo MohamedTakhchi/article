@@ -21,10 +21,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//For Admin Only
 Route::get('/config/users', 'AdminController@users')->name('configUsers');
-
-
 
 Route::post('/users/setAdmin/{id}', 'UserController@setAdmin')->name('setUserAsAdmin');
 Route::post('/delete/{id}', 'UserController@delete')->name('deleteUser');
+
+//For Users
+Route::get('/addPost','PostController@addForm')->name('addPostForm');
+Route::post('/create','PostController@create')->name('createPost');
+Route::get('/myPosts','PostController@userPosts')->name('userPosts');
+Route::get('/updateForm/{id}','PostController@updateForm')->name('updatePostForm');
+Route::post('/updatePost','PostController@update')->name('updatePost');
+Route::post('/deletePost/{id}','PostController@delete')->name('deletePost');
+
+
+
+
