@@ -49,6 +49,12 @@ class PostController extends Controller
     	return view('post.list', ['posts' => $posts]);
     }
 
+    public function savedPosts()
+    {
+        $posts = Auth::user()->saves()->orderBy('saves.created_at','desc')->paginate(5);
+        return view('post.saved', ['posts' => $posts]);
+    }
+
     public function updateForm($id)
     {
     	$post = Post::find($id);
@@ -89,4 +95,51 @@ class PostController extends Controller
     	if( $request->deleteForAdmin )
     		return redirect()->route('configPosts')->with('success', 'Article Supprimé');
     }
+
+
+    public function liked(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $post = Post::find($request->post_id);
+            $post->likes()->attach($request->user_id);
+
+            return 1;
+        }
+    }
+
+    public function unliked(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $post = Post::find($request->post_id);
+            $post->likes()->detach($request->user_id);
+
+            return 1;
+        }
+    }
+
+
+    public function saved(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $post = Post::find($request->post_id);
+            $post->saves()->attach($request->user_id);
+
+            return 1;
+        }
+    }
+
+    public function unsaved(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $post = Post::find($request->post_id);
+            $post->saves()->detach($request->user_id);
+
+            return 1;
+        }
+    }
+
 }

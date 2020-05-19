@@ -48,7 +48,7 @@
                                 <a class="nav-link" href="{{ route('userPosts') }}">{{ __('Mes Articles') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Articles Enregistrés') }}</a>
+                                <a class="nav-link" href="{{ route('savedPosts') }}">{{ __('Articles Enregistrés') }}</a>
                             </li>
                         @endif
                     </ul>

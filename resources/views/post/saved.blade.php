@@ -4,7 +4,7 @@
 
     @foreach( $posts as $post )
 
-        <div class="card" style="width: 60%;margin: auto;margin-bottom: 3em;border-radius: 16px;" >
+        <div class="card" id="card" style="width: 60%;margin: auto;margin-bottom: 3em;border-radius: 16px;" >
 
             <div class="card-body">
                 <h1 class="card-title">{{ $post->title }}</h1>
@@ -37,21 +37,8 @@
                         <span class="far fa-heart"></span>Like
                     @endif
                 </button>
-                <button type="button" id="save" data-userId="{{ Auth::user()->id }}" data-postId="{{ $post->id }}" class="btn btn-light" style="width: 50%;">
-                    @if( count($post->saves) > 0 )
-                        @for ($i = 0; $i < count($post->saves); $i++)
-                            @if( $post->saves[$i]->pivot->user_id == Auth::user()->id )
-                                <span class="fas fa-bookmark" style="color: #191970;"></span>Annuler Enregistrement
-                                @break
-                            @else
-                                @if( count($post->likes) == ($i+1) )
-                                    <span class="far fa-bookmark"></span>Enregistrer
-                                @endif
-                            @endif
-                        @endfor
-                    @else
-                        <span class="far fa-bookmark"></span>Enregistrer
-                    @endif
+                <button type="button" id="unsave" data-userId="{{ Auth::user()->id }}" data-postId="{{ $post->id }}" class="btn btn-light" style="width: 50%;">
+                    <span class="fas fa-bookmark" style="color: #191970;"></span>Annuler Enregistrement
                 </button>
             </div>
 

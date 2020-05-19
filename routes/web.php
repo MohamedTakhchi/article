@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+	if( !Auth::check() ){
+		$posts = Post::orderBy('created_at','desc')->paginate(5);
+    	return view('welcome', ['posts' => $posts]);
+	}
+    else
+    	return redirect()->route('home');
 });
 
 Auth::routes();
@@ -35,6 +43,11 @@ Route::get('/myPosts','PostController@userPosts')->name('userPosts');
 Route::get('/updateForm/{id}','PostController@updateForm')->name('updatePostForm');
 Route::post('/updatePost','PostController@update')->name('updatePost');
 Route::post('/deletePost/{id}','PostController@delete')->name('deletePost');
+Route::get('/savedPosts','PostController@savedPosts')->name('savedPosts');
+Route::post('/likePost','PostController@liked')->name('likePost');
+Route::post('/unlikePost','PostController@unliked')->name('unlikePost');
+Route::post('/savePost','PostController@saved')->name('savePost');
+Route::post('/unsavePost','PostController@unsaved')->name('unsavePost');
 
 
 

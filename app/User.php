@@ -42,4 +42,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
+
+    public function saves()
+    {
+        return $this->belongsToMany('App\Post','saves')->withTimestamps();
+    }
+
+    
 }

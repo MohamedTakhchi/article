@@ -11,4 +11,14 @@ class Post extends Model
 	{
 	    return $this->belongsTo('App\User')->withDefault();
 	}
+
+	public function likes()
+	{
+		return $this->belongsToMany('App\User','likes')->withTimestamps();
+	}
+
+	public function saves()
+	{
+		return $this->belongsToMany('App\User','saves')->withTimestamps();
+	}
 }
