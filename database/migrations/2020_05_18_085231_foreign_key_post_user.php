@@ -15,7 +15,7 @@ class ForeignKeyPostUser extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
